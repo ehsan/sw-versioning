@@ -3,7 +3,7 @@
   if (!navigator.sendBeacon("beaconEndpoint")) {
     alert("Sending the beacon failed!");
   }
-  window.onmessage = function(e) {
+  navigator.serviceWorker.onmessage = function(e) {
     window.parent.postMessage(e.data, "*");
   };
 </script>
