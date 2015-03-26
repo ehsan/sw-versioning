@@ -4,7 +4,7 @@ onfetch = function(e) {
     e.respondWith(
       clients.matchAll()
         .then(function(clients) {
-          dump("found " + client.length + " clients\n");
+          dump("found " + clients.length + " clients\n");
           clients.forEach(function(client) {
             client.postMessage({data: "beacon"});
             dump("message posted\n");
