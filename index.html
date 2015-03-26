@@ -49,8 +49,10 @@
           document.body.appendChild(iframe);
         }
         function updateCount(count) {
-          var res = document.querySelector("#counter");
-          res.textContent = count + " beacons have been sent";
+          if (count) {
+            var res = document.querySelector("#counter");
+            res.textContent = count + " beacons have been sent";
+          }
         }
         caches.delete("beacon").then(function() {
           setTimeout(function timer() {
@@ -62,6 +64,8 @@
               }).then(function(res) {
                 if (res) {
                   return res.text();
+                } else {
+                  return 0;
                 }
               }).then(function(count) {
                 updateCount(count);
