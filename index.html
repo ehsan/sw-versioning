@@ -36,6 +36,8 @@
             } else {
               start(reg);
             }
+          }, function(err) {
+            alert("Service worker registration failed: " + err);
           });
         function start(reg) {
           // Show the controls!
