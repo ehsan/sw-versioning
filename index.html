@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Beacon Detector</title>
+  </head>
+  <body>
+    <h3>This demo shows how to detect whether a beacon is sent using service workers</h3>
+    <div id="controls" style="display:none">
+      <button onclick-"sendBeacon()">Send beacon</button>
+      <div id="counter"></div>
+    </div>
+    <script>
+      (function() {
+        var msg;
+        if (!("serviceWorker" in navigator)) {
+          msg = "Your browser doesn't support service workers.  Please use Firefox Nightly.";
+        }
+        if (!("sendBeacon" in navigator)) {
+          msg = "Your browser doesn't support sendBeacon.  Please use Firefox Nightly.";
+        }
+        if (!("caches" in window)) {
+          msg = "Your browser doesn't support DOM Cache.  Please use Firefox Nightly.";
+        }
+        if (msg) {
+          var div = document.createElement("div");
+          div.appendChild(document.createTextNode(msg));
+          document.body.appendChild(div);
+          return;
+        }
+        navigator.serviceWorker.register("sw.js", {scope: "."})
+          .then(function(reg) {
+            if (reg.installing) {
+              reg.installing.onstatechange = function(e) {
+                start(reg);
+              };
+            } else {
+              start(reg);
+            }
+          });
+        function start(reg) {
+          // Show the controls!
+          var controls = document.querySelector("#controls");
+          controls.style.display = "default";
+        }
+        function sendBeacon() {
+          var iframe = document.createElement("iframe");
+          iframe.style.display = "none";
+          iframe.src = "beacon.html";
+          document.body.appendChild(iframe);
+        }
+        function updateCount(count) {
+          var res = document.querySelector("#counter");
+          res.textContent = count + " beacons have been sent";
+        }
+        caches.delete("beacon").then(function() {
+          setTimeout(function timer() {
+            var cache;
+            caches.open("beacon")
+              .then(function(c) {
+                cache = c;
+                return cache.match("count");
+              }).then(function(res) {
+                if (res) {
+                  return res.text();
+                }
+              }).then(function(count) {
+                updateCount(count);
+                setTimeout(timer, 500);
+              });
+        }, 500);
+      })();
+    </script>
+  </body>
+</html>
