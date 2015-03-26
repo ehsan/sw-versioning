@@ -44,31 +44,18 @@
           var controls = document.querySelector("#controls");
           controls.style.display = "";
         }
+        var count = 0;
         function updateCount(count) {
           if (count) {
             var res = document.querySelector("#counter");
             res.textContent = count + " beacons have been sent";
           }
         }
-        caches.delete("beacon").then(function() {
-          setTimeout(function timer() {
-            var cache;
-            caches.open("beacon")
-              .then(function(c) {
-                cache = c;
-                return cache.match("count");
-              }).then(function(res) {
-                if (res) {
-                  return res.text();
-                } else {
-                  return 0;
-                }
-              }).then(function(count) {
-                updateCount(count);
-                setTimeout(timer, 500);
-              });
-          }, 500);
-        });
+        window.onmessage = function(e) {
+          if (e.data.data == "beacon") {
+            updateCount(++count);
+          }
+        };
       })();
       function sendBeacon() {
         var iframe = document.createElement("iframe");
