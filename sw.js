@@ -1,6 +1,5 @@
 onfetch = function(e) {
   if (e.request.url.indexOf("beaconEndpoint") >= 0) {
-    var cache;
     e.respondWith(
       clients.matchAll({includeUncontrolled:true})
         .then(function(clients) {

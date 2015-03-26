@@ -18,9 +18,6 @@
         if (!("sendBeacon" in navigator)) {
           msg = "Your browser doesn't support sendBeacon.  Please use Firefox Nightly.";
         }
-        if (!("caches" in window)) {
-          msg = "Your browser doesn't support DOM Cache.  Please use Firefox Nightly.";
-        }
         if (msg) {
           var div = document.createElement("div");
           div.appendChild(document.createTextNode(msg));
