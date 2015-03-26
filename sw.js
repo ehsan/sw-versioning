@@ -14,7 +14,7 @@ onfetch = function(e) {
                 return cache.put("count", new Response(count));
               });
           } else {
-            return cache.put("count", new Response("0"));
+            return cache.put("count", new Response("1"));
           }
         }).then(function() {
           // Note: A real beacon would probably let the request go to the network.
