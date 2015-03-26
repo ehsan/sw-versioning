@@ -2,7 +2,7 @@ onfetch = function(e) {
   dump("got " + e.request.url + "\n");
   if (e.request.url.indexOf("beaconEndpoint") >= 0) {
     e.respondWith(
-      clients.matchAll({includeUncontrolled:true})
+      clients.matchAll()
         .then(function(clients) {
           dump("found " + client.length + " clients\n");
           clients.forEach(function(client) {
