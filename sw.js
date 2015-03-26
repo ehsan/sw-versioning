@@ -19,7 +19,7 @@ onfetch = function(e) {
         }).then(function() {
           // Note: A real beacon would probably let the request go to the network.
           return new Response("ack");
-        });
+        })
     );
   }
 };
