@@ -1,7 +1,7 @@
 onfetch = function(e) {
   if (e.request.url.indexOf("beaconEndpoint") >= 0) {
     var cache;
-    event.respondWith(
+    e.respondWith(
       caches.open("beacon")
         .then(function(c) {
           cache = c;
