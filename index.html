@@ -44,12 +44,6 @@
           var controls = document.querySelector("#controls");
           controls.style.display = "";
         }
-        function sendBeacon() {
-          var iframe = document.createElement("iframe");
-          iframe.style.display = "none";
-          iframe.src = "beacon.html";
-          document.body.appendChild(iframe);
-        }
         function updateCount(count) {
           if (count) {
             var res = document.querySelector("#counter");
@@ -76,6 +70,12 @@
           }, 500);
         });
       })();
+      function sendBeacon() {
+        var iframe = document.createElement("iframe");
+        iframe.style.display = "none";
+        iframe.src = "beacon.html";
+        document.body.appendChild(iframe);
+      }
     </script>
   </body>
 </html>
