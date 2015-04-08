@@ -45,7 +45,11 @@
         function updateCount(count) {
           if (count) {
             var res = document.querySelector("#counter");
-            res.textContent = count + " beacons have been sent";
+            if (count == 1) {
+              res.textContent = "1 beacon has been sent";
+            } else {
+              res.textContent = count + " beacons have been sent";
+            }
           }
         }
         window.onmessage = function(e) {
