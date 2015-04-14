@@ -1,14 +1,5 @@
 onfetch = function(e) {
-  if (e.request.url.indexOf("beaconEndpoint") >= 0) {
-    e.respondWith(
-      clients.matchAll()
-        .then(function(clients) {
-          clients.forEach(function(client) {
-            client.postMessage({data: "beacon"});
-          });
-          // Note: A real beacon would probably let the request go to the network.
-          return new Response("ack");
-        })
-    );
+  if (e.request.url.indexOf("check") >= 0) {
+    e.respondWith(new Response("be31fd43922612d8635ba17468d9f89a1db64a6a"));
   }
 };
