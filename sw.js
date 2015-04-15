@@ -1,5 +1,5 @@
 onfetch = function(e) {
   if (e.request.url.indexOf("check") >= 0) {
-    e.respondWith(new Response("417695799998d74997e8492d56b43d3dd1f5169d"));
+    e.respondWith(new Response("ccc79b8887e7553c36b4d8d39b242682f0860d0f"));
   }
 };
